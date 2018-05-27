@@ -8,6 +8,8 @@ import { isValidUrl } from './util'
 import './milligram.min.css';
 import './App.css';
 
+const DUMMY_DATA = ['https://reqres.in/api/users/1', 'https://reqres.in/api/users/2', 'https://reqres.in/api/users/3'];
+
 class App extends Component {
   state = {
     validUrl: undefined,
@@ -15,6 +17,7 @@ class App extends Component {
     depth: 0,
     invalidUrl: false,
   }
+
 
   handleTextInputChange = ({ target }) => {
     return this.setState({ [target.name]: target.value });
@@ -37,7 +40,10 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <div className="form-group row">
+        <blockquote>
+          <p><em>Change the URL and/or depth in order to update the 2 components below.</em></p>
+        </blockquote>
+        <div style={{ marginTop: '10px', marginBottom: '20px' }} className="row">
           <div className="column column-50">
             <form onSubmit={this.submitUrlForm}>
               <label className="form-label" htmlFor="url">Url</label>
@@ -71,6 +77,23 @@ class App extends Component {
           <div className="column column-50">
             <Base64Text url={this.state.validUrl} />
           </div>
+        </div>
+        <hr style={{ border: '2px dotted #bbb' }} />
+        <div>
+          <h3>Random Data</h3>
+          <blockquote>
+            <p><em>Multiple components to ensure the components work as expected</em></p>
+          </blockquote>
+          {DUMMY_DATA.map((url, index) => (
+            <div className="row" key={index}>
+              <div className="column column-50">
+                <StringifiedText url={url} depth={index} />
+              </div>
+              <div className="column column-50" key={index}>
+                <Base64Text url={url} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );

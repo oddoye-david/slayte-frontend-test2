@@ -41,7 +41,7 @@ class StringifiedText extends BaseComponent {
   render() {
     return (
       <div>
-        <h4>Stringified</h4>
+        <h4>Stringified <small>(Depth: {this.props.depth})</small></h4>
         <div>
           {
             this.state.isLoading
